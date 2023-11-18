@@ -24,7 +24,7 @@ This Node module has been developed and tested with Node.js version 20.9.0 and 2
 
 5. Require the node module in `app.js` by inserting this line of code at the top of the file:
     ```
-    const gymPortal = require("./natalie_webapi.js);
+    const gym = require("./natalie_webapi.js);
     ```
 
 6. Install dependencies:
@@ -42,23 +42,24 @@ This Node module has been developed and tested with Node.js version 20.9.0 and 2
 
 ## Usage
 ### Functions
-1. Add Trainer <br>
+1. addPersonalTrainer(name, specialty) <br>
 Required parameters: **name**, **specialty** <br>
+This function adds a personal trainer into the system. <br>
 Sample usage:
     ```
-    // Add three trainers into the system
-    gymPortal.addTrainer("Jack Bulldog", "endurance, and flexability");
-    gymPortal.addTrainer("Janice Whale", "strength training, and flexability");
-    gymPortal.addTrainer("Willy Wonka", "weight loss, strength training, flexability, and Horse kicking");
+    // Add three personal trainers into the system
+    gym.addTrainer("Jack Bulldog", "endurance, and flexability");
+    gym.addTrainer("Janice Whale", "strength training, and flexability");
+    gym.addTrainer("Willy Wonka", "weight loss, strength training, flexability, and Horse kicking");
     ```
 <br>
 
-2. Display All Trainers <br>
-No parameters required. <br>
+2. viewAllTrainers() <br>
+No parameters required. This function displays all personal trainers with corresponding name and specialty. <br>
 Call the function:
     ```
     // View details of all personal trainers
-    const allTrainers = gymPortalController.viewAllTrainers();
+    const allTrainers = gymController.viewAllTrainers();
 
     console.log("Registered Personal Trainers (PT):");
     allTrainers.forEach(trainer => {
@@ -74,23 +75,24 @@ Call the function:
     ```
 <br>
 
-3. Trainer Select Sessions <br>
-Reqyured parameters: **name** (must be existing trainer), **time slot** (can enter more than 3) <br>
+3. trainerSelectSessions(name, ...selectedSessions) <br>
+Required parameters: **name** (must be existing trainer), **time slot** (can provide more than 3) <br>
+This function allows registered personal trainers in the system to select sessions to be on duty. <br>
 Sample usage:
     ```
     // User must select at least 3 time slots
-    gymPortal.trainerSelectSessions('Jack Bulldog', '05:00 - 07:00', '07:00 - 09:00', '09:00 - 11:00');
-    gymPortal.trainerSelectSessions('Janice Whale', '05:00 - 07:00', '11:00 - 13:00','13:00 - 15:00', '15:00 - 17:00');
-    gymPortal.trainerSelectSessions('Willy Wonka', '17:00 - 19:00', '19:00 - 21:00', '21:00 - 23:00');
+    gym.trainerSelectSessions('Jack Bulldog', '05:00 - 07:00', '07:00 - 09:00', '09:00 - 11:00');
+    gym.trainerSelectSessions('Janice Whale', '05:00 - 07:00', '11:00 - 13:00','13:00 - 15:00', '15:00 - 17:00');
+    gym.trainerSelectSessions('Willy Wonka', '17:00 - 19:00', '19:00 - 21:00', '21:00 - 23:00');
     ```
 <br>
 
-4. Display All Available Sessions <br>
-No parameters required. <br>
+4. viewAvailablePTsessions() <br>
+No parameters required. This function displays all available personal trainer sessions. <br>
 Call the function:
     ```
     // View all available personal trainer sessions
-    const availableSessions = gymPortal.viewAvailablePTsessions();
+    const availableSessions = gym.viewAvailablePTsessions();
     console.log("Available Personal Trainer Sessions:");
     availableSessions.forEach(session => {
         console.log(session);
@@ -114,16 +116,17 @@ Call the function:
     ```
 <br>
 
-5. Book Gym Slot <br>
+5. bookGym(name, contact, fitnessGoal, preferredSessionTime) <br>
 Required parameters: **name**, **contact**(optional), **fitness goal**, **desired time slot** <br>
+This function allows members to book gym sessions based on fitness goals and preferred timing or just book a general session with a PT. <br>
 Sample usage:
     ```
-    // User book a session with a PT based on fitness goals and preferred timing OR User book a general session without a PT
-    const bookGym1 = gymPortal.bookGym('Kacey More', '8123456', 'flexability', '09:00 - 11:00');
+    // User book a session with a PT based on fitness goals and preferred timing OR User book a general session with a PT
+    const bookGym1 = gym.bookGym('Kacey More', '8123456', 'flexability', '09:00 - 11:00');
     console.log(bookGym1);
 
     // User book general session without specific fitness goal but with personal trainer
-    const bookGym2 = gymPortal.bookGym('Red Matt', '82593939', '', '21:00 - 23:00');
+    const bookGym2 = gym.bookGym('Red Matt', '82593939', '', '21:00 - 23:00');
     console.log(bookGym2);
     ```
 
@@ -131,24 +134,4 @@ Sample usage:
     ```
     Hi Kacey More, your booking is successful! Jack Bulldog will be your personal trainer for your fitness goal: FLEXABILITY at 09:00 - 11:00.
     Hi Red Matt, your booking is successful! You have a general session at 21:00 - 23:00 with no targetted fitness goal with Willy Wonka.
-    ```
-<br>
-
-6. Display All Members Scheduled Timings <br>
-No parameters required. <br>
-Call the function:
-    ```
-    // Display all members registered with their registered timing
-    const allMembersData = gymPortal.displayAllMemberSchedule();
-    console.log("Members' Schedule:");
-    allMembersData.forEach(memberData => {
-        console.log(`NAME: ${memberData.name}, TIMING: ${memberData.registeredTiming}`);
-    });
-    ```
-
-    Expected output:
-    ```
-    Members' Schedule:
-    NAME: Kacey More, TIMING: 09:00 - 11:00
-    NAME: Red Matt, TIMING: 21:00 - 23:00
     ```
