@@ -1,5 +1,3 @@
-// Gym Portal Node Module
-
 // Simulate database using arrays
 const trainerController = {
     trainers: [],
@@ -33,18 +31,18 @@ const memberController = {
 }
 
 // Function 1: Add newly hired trainer into the system
-function addTrainer(name, specialty) {
+function addPersonalTrainer(name, specialty) {
     // create a new trainer object with an empty array for selected sessions
-    const newTrainer = {
+    const newPersonalTrainer = {
         name: name,
         specialty: specialty,
         selectedSessions: [],
     };
-    // add the newly created trainer to the list of trainers in the simulated database
-    trainerController.trainers.push(newTrainer);
+    // add the newly created personal trainer to the list of trainers in the simulated database
+    trainerController.trainers.push(newPersonalTrainer);
 }
 
-// Function 2: Allow trainer to select at least 3 time slots to achieve minimum working hours
+// Function 2: Allow trainer to select at least 3 time slots to be on duty
 function trainerSelectSessions(name, ...selectedSessions) {
     // find the trainer in the list of registered trainers
     const trainer = trainerController.trainers.find(trainer => trainer.name === name);
@@ -139,7 +137,7 @@ function bookGym(name, contact, fitnessGoal, preferredSessionTime) {
                 }
             } else {
                 // return a message if no available trainers are found
-                return `Sorry ${name}, no available trainers for your preferred session tie or fitness goal. Please choose another time or specify a different fitness goal.`;
+                return `Sorry ${member.name}, no available trainers for your preferred session tie or fitness goal. Please choose another time or specify a different fitness goal.`;
             }
         } else {
             // handle booking for a general session without a fitness goal
@@ -182,32 +180,10 @@ function bookGym(name, contact, fitnessGoal, preferredSessionTime) {
     }
 }
 
-// Function 6: Display members and their registered timing
-function displayAllMemberSchedule() {
-    // array to store members data
-    const membersData = [];
-
-    // check if the session is booked and booked members
-    memberController.timeslots.forEach(session => {
-        if (session.booked && session.bookedMembers && session.bookedMembers.length > 0) {
-            session.bookedMembers.forEach(bookedMember => {
-                membersData.push({
-                    name: bookedMember,
-                    registeredTiming: session.time,
-                });
-            });
-        }
-    });
-    return membersData;
-}
-
-
-
 module.exports = {
-    addTrainer,
+    addPersonalTrainer,
     trainerSelectSessions,
     viewAvailablePTsessions,
     viewAllTrainers,
-    bookGym,
-    displayAllMemberSchedule
+    bookGym
 };
