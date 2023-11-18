@@ -63,7 +63,7 @@ function trainerSelectSessions(name, ...selectedSessions) {
     }
 }
 
-// Function 4: View all available personal trainer sessions
+// Function 3: View all available personal trainer sessions
 function viewAvailablePTsessions() {
     // array to store available sessions
     const availableSessions = [];
@@ -85,7 +85,7 @@ function viewAvailablePTsessions() {
     return formatOutput;
 }
 
-// Function 3: Users to view all personal trainers
+// Function 4: Users to view all personal trainers
 function viewAllTrainers() {
     return trainerController.trainers;
 }
